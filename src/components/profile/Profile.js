@@ -1,15 +1,15 @@
 import React from 'react';
 import Followers from './FollowersCard';
-import ProfileCard from './UserCard';
+import UserCard from './UserCard';
 import styles from './Profile.module.scss'
 
 
-const Profile = () => {
+const Profile = ({ data }) => {
     return (
         <section>
             <div className="container">
                 <div className={styles.profile}>
-                    <ProfileCard />
+                    <UserCard data={data} />
                     <Followers />
                 </div>
             </div>

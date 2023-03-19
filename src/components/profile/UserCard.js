@@ -4,45 +4,48 @@ import styles from './Profile.module.scss';
 
 import { Company, LinkIcon, Location } from '@/icons/icons';
 
-const UserCard = () => {
+const UserCard = ({ data }) => {
     return (
         <div className={`${styles.card}`}>
             <div className={styles.user}>
                 <article>
                     <header>
                         <img
-                            src="https://avatars.githubusercontent.com/u/42133389?v=4"
-                            alt="John Smilga"
+                            src={data.avatar_url}
+                            alt={data.name}
                         />
                         <div>
-                            <h4>John Smilga</h4>
-                            <p>@john_smilga</p>
+                            <h4>{data.name}</h4>
+                            <p>@{data.login}</p>
                         </div>
                         <a
                             className={styles['follow-link']}
-                            href="https://github.com/john-smilga"
+                            href={data.html_url}
                         >
                             follow
                         </a>
                     </header>
-                    <p className={styles.bio}>Creator of Coding Addict</p>
+                    <p className={styles.bio}>{data.bio}</p>
                     <div className={styles['user-info']}>
-                        <p>
+                        {data.company && <p>
                             <Company />
-                            Coding Addict
-                        </p>
-                        <p>
+                            {data.company}
+                        </p>}
+                        {data.location && <p>
                             <Location />
-                            Sarasota, FL
-                        </p>
-                        <a href="https://www.johnsmilga.com">
-                            <LinkIcon />
-                            www.johnsmilga.com
-                        </a>
+                            {data.location}
+                        </p>}
+                        {data.blog && <p>
+                            <a href={`https://www.${data.blog}`}>
+                                <LinkIcon />
+                                {data.blog}
+                            </a>
+                        </p>}
+
                     </div>
                 </article>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 };
 

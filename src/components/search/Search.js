@@ -1,8 +1,21 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { SearchIcon } from '@/icons/icons.js';
 import styles from './Search.module.scss';
+import { useDispatch } from 'react-redux';
+import { setSearchUser } from '@/redux/usersSlice';
 
 const Search = () => {
+
+    const dispatch = useDispatch();
+    const searchRef = useRef();
+
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        let searchValue = searchRef.current.value;
+        dispatch(setSearchUser(searchValue))
+    }
+
     return (
         <section>
             <div className="container">
@@ -12,10 +25,11 @@ const Search = () => {
                             <SearchIcon />
                             <input
                                 type="text"
-                                placeholder="enter github user"
-                                // value=""
+                                placeholder="Search Github User"
+                                ref={searchRef}
+
                             />
-                            <button type="submit">search</button>
+                            <button type="submit" onClick={handleSearch}>Search</button>
                         </div>
                     </form>
                     <h3 className={styles.h3}>requests : 56 / 60</h3>
