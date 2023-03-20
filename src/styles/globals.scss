@@ -54,6 +54,38 @@ section {
     margin-bottom: 4rem;
 }
 
+
+/*=============== 
+Spinner
+================*/
+
+.spinner-container {
+    position: relative;
+}
+
+@keyframes spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% -50%);
+    width: 12rem;
+    height: 12rem;
+    margin: 0 auto;
+    // margin-top: 10rem;
+    border-radius: 50%;
+    border: 3px solid #ccc;
+    border-top-color: $primary-clr;
+    animation: spinner 0.6s linear infinite;
+}
+
+
+
 /* width */
 ::-webkit-scrollbar {
     width: 10px;
