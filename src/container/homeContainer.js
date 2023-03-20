@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import StatsCard from '@/components/card/StatsCard';
@@ -8,14 +8,16 @@ const NextFusionCharts = dynamic(
     () => import('@/components/fusioncharts/NextFusioncharts'),
     { ssr: false }
 );
-import { useGetGithubUserByNameQuery, useGetGithubUserByFollowersQuery } from '@/services/githubUser';
+import { useGetGithubUserByNameQuery, useGetGithubUserByFollowersQuery, useGetGithubUserByReposQuery } from '@/services/githubUser';
 import { useSelector } from 'react-redux';
 import Loading from '@/components/common/Loading';
 
 export default function HomeContainer() {
     const { searchUser } = useSelector((state) => state.users);
-    const { data, error, isError, isLoading } =
-        useGetGithubUserByNameQuery(searchUser);
+    const { data, isError, isLoading } = useGetGithubUserByNameQuery(searchUser);
+    const { data: followersData } = useGetGithubUserByFollowersQuery(searchUser);
+    const { data: reposData } = useGetGithubUserByReposQuery(searchUser);
+
 
     if (isLoading) {
         return <Loading />;
@@ -35,8 +37,8 @@ export default function HomeContainer() {
             <main>
                 <Search isError={isError} />
                 <StatsCard data={data} />
-                <Profile data={data} />
-                <NextFusionCharts />
+                <Profile data={data} followersData={followersData} />
+                <NextFusionCharts reposData={reposData} />
             </main>
         </>
     );

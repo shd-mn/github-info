@@ -5,7 +5,6 @@ import styles from './Profile.module.scss';
 import { Company, LinkIcon, Location } from '@/icons/icons';
 
 const UserCard = ({ data }) => {
-    console.log(data)
     return (
         <div className={`${styles.card}`}>
             <div className={styles.user}>
@@ -19,6 +18,7 @@ const UserCard = ({ data }) => {
                         <a
                             className={styles['follow-link']}
                             href={data?.html_url}
+                            target="_blank"
                         >
                             follow
                         </a>

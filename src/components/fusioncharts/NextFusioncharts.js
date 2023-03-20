@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 // Include the react-fusioncharts component
 import ReactFC from 'react-fusioncharts';
@@ -12,6 +12,7 @@ import Column2D from 'fusioncharts/fusioncharts.charts';
 // Include the theme as fusion
 import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
 import styles from './Carts.module.scss';
+import { useGetGithubUserByReposQuery } from '@/services/githubUser';
 
 // Adding the chart and theme as dependency to the core fusioncharts
 ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
@@ -25,22 +26,20 @@ const chartData = [
         value: '3100',
     },
     {
-        label: 'Saudi',
-        value: '2800',
+        label: 'Venezuela',
+        value: '3100',
     },
     {
-        label: 'Canada',
-        value: '1680',
+        label: 'Deneme',
+        value: '1000',
     },
     {
-        label: 'Iran',
-        value: '1230',
-    },
-    {
-        label: 'Iran',
-        value: '1230',
+        label: 'Deneme',
+        value: '1000',
     },
 ];
+
+
 
 // STEP 3 - Creating the JSON object to store the chart configurations
 const languageConfigs = {
@@ -70,8 +69,7 @@ const languageConfigs = {
             // baseFont: "Roboto",
             // baseFontSize: "11",
             // baseFontColor: "primary-clr"
-        },
-        data: chartData,
+        }
     },
 };
 const starsConfigs = {
@@ -142,7 +140,28 @@ const forkedReposConfigs = {
     },
 };
 
-const NextFusionCharts = () => {
+const NextFusionCharts = ({ reposData }) => {
+
+    const languageData = [{ label: "unknown", value: 0 }];
+
+    reposData.map(item => {
+        if (!!item.language) {
+            let cordinat = languageData.findIndex(value => value?.label === item?.language);
+            if (cordinat == -1) {
+                languageData.push({
+                    label: item.language,
+                    value: 1,
+                })
+            } else {
+                languageData[cordinat].value += 1;
+            }
+        } else {
+            languageData[0].value += 1;
+        }
+    })
+
+    languageConfigs.dataSource.data = languageData
+
     return (
         <section>
             <div className="container">

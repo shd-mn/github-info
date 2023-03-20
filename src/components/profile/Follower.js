@@ -1,19 +1,20 @@
 import React from 'react';
 import styles from './Profile.module.scss';
-const Follower = () => {
+const Follower = ({ followers }) => {
     return (
         <article>
             <img
-                src="https://avatars.githubusercontent.com/u/42133389?v=4"
-                alt="John Smilga"
+                src={followers.avatar_url}
+                alt={followers.login}
             />
             <div className={styles['followers-info']}>
-                <h4>John Smilga</h4>
+                <h4>{followers?.login}</h4>
                 <a
                     className={styles['follow-link']}
-                    href="https://github.com/john-smilga"
+                    href={followers.html_url}
+                    target="_blank"
                 >
-                    https://github.com/john-smilga
+                    {followers.html_url}
                 </a>
             </div>
         </article>

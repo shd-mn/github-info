@@ -4,13 +4,13 @@ import UserCard from './UserCard';
 import styles from './Profile.module.scss'
 
 
-const Profile = ({ data }) => {
+const Profile = ({ data, followersData }) => {
     return (
         <section>
             <div className="container">
                 <div className={styles.profile}>
                     <UserCard data={data} />
-                    <Followers />
+                    <Followers followersData={followersData} />
                 </div>
             </div>
         </section>
