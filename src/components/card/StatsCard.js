@@ -1,5 +1,5 @@
 import React from 'react';
-import StatsCardItem from './StatsCartItem';
+import StatsCardItem from './StatsCartdtem';
 import { Repos, Followers, Following } from '@/icons/icons'
 import styles from './StatsCard.module.scss'
 

@@ -11,8 +11,7 @@ import Column2D from 'fusioncharts/fusioncharts.charts';
 
 // Include the theme as fusion
 import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
-import styles from './Carts.module.scss';
-import { useGetGithubUserByReposQuery } from '@/services/githubUser';
+import styles from './Charts.module.scss';
 
 // Adding the chart and theme as dependency to the core fusioncharts
 ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);

@@ -5,7 +5,7 @@ import StatsCard from '@/components/card/StatsCard';
 import Search from '@/components/search/Search';
 import Profile from '@/components/profile/Profile';
 const NextFusionCharts = dynamic(
-    () => import('@/components/fusioncharts/NextFusioncharts'),
+    () => import('@/components/fusioncharts/NextFusionChart'),
     { ssr: false }
 );
 import { useGetGithubUserByNameQuery, useGetGithubUserByFollowersQuery, useGetGithubUserByReposQuery } from '@/services/githubUser';
