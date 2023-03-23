@@ -67,7 +67,7 @@ export const Gists = () => {
             fill="currentColor"
             strokeWidth="0"
             viewBox="0 0 12 16"
-            class="icon"
+            className="icon"
             height="1em"
             width="1em"
             xmlns="http://www.w3.org/2000/svg"
