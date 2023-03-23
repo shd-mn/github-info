@@ -7,7 +7,7 @@ const Followers = ({ followersData }) => {
         <div className={`${styles.card} ${styles['followers-card']}`}>
             <div className={styles.followers}>
                 {
-                    followersData?.map((followers, index) => <Follower key={index} followers={followers} />)
+                    followersData?.map(followers => <Follower key={followers.id} followers={followers} />)
                 }
             </div>
         </div>
