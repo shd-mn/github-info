@@ -1,23 +1,30 @@
-// Need to use the React-specific entry point to import createApi
+
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-// Define a service using a base URL and expected endpoints
 export const githubApi = createApi({
    reducerPath: 'githubApi',
    baseQuery: fetchBaseQuery({ baseUrl: 'https://api.github.com/' }),
-   endpoints: (builder) => ({
-      getGithubUserByName: builder.query({
+   endpoints: (build) => ({
+      getGithubUserByName: build.query({
          query: (name) => `users/${name}`,
       }),
-      getGithubUserByFollowers: builder.query({
-         query: (name) => `users/${name}/followers`,
+      getGithubUserByFollowers: build.query({
+         query: ({ name, page }) => `users/${name}/followers?page=${page}&per_page=30`,
+
+         serializeQueryArgs: ({ endpointName }) => {
+            return endpointName
+         },
+         merge: (currentCache, newItems) => {
+            currentCache.push(...newItems)
+         },
+         forceRefetch({ currentArg, previousArg }) {
+            return currentArg !== previousArg
+         },
       }),
-      getGithubUserByRepos: builder.query({
+      getGithubUserByRepos: build.query({
          query: (name) => `users/${name}/repos?page=1&per_page=100`,
       }),
    }),
 })
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
 export const { useGetGithubUserByNameQuery, useGetGithubUserByFollowersQuery, useGetGithubUserByReposQuery } = githubApi
