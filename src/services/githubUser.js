@@ -9,17 +9,7 @@ export const githubApi = createApi({
          query: (name) => `users/${name}`,
       }),
       getGithubUserByFollowers: build.query({
-         query: ({ name, page }) => `users/${name}/followers?page=${page}&per_page=30`,
-
-         serializeQueryArgs: ({ endpointName }) => {
-            return endpointName
-         },
-         merge: (currentCache, newItems) => {
-            currentCache.push(...newItems)
-         },
-         forceRefetch({ currentArg, previousArg }) {
-            return currentArg !== previousArg
-         },
+         query: ({ name, page }) => `users/${name}/followers?page=${page}&per_page=50`,
       }),
       getGithubUserByRepos: build.query({
          query: (name) => `users/${name}/repos?page=1&per_page=100`,
