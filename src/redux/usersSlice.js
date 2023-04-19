@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { githubApi } from '@/services/githubUser';
 
 const initialState = {
-   searchUser: "yasinelbuz",
+   searchUser: "shd-mn",
    items: [],
    page: 1,
 }
