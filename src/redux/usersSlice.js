@@ -2,10 +2,10 @@ import { createSlice } from '@reduxjs/toolkit'
 import { githubApi } from '@/services/githubUser';
 
 const initialState = {
-   searchUser: "shd-mn",
-   items: [],
-   page: 1,
-}
+    searchUser: 'john-smilga',
+    items: [],
+    page: 1,
+};
 
 export const usersSlice = createSlice({
    name: 'users',
