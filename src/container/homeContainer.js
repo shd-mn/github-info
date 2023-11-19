@@ -8,13 +8,18 @@ const NextFusionCharts = dynamic(
     () => import('@/components/fusioncharts/NextFusionChart'),
     { ssr: false }
 );
-import { useGetGithubUserByNameQuery, useGetGithubUserByFollowersQuery, useGetGithubUserByReposQuery } from '@/services/githubUser';
+import {
+    useGetGithubUserByNameQuery,
+    useGetGithubUserByFollowersQuery,
+    useGetGithubUserByReposQuery,
+} from '@/redux/services/githubApi';
 import { useSelector } from 'react-redux';
 
 export default function HomeContainer() {
     const { searchUser } = useSelector((state) => state.users);
     const { data, isError } = useGetGithubUserByNameQuery(searchUser);
-    const { data: reposData, isLoading } = useGetGithubUserByReposQuery(searchUser);
+    const { data: reposData, isLoading } =
+        useGetGithubUserByReposQuery(searchUser);
 
     return (
         <>
@@ -27,12 +32,14 @@ export default function HomeContainer() {
                 />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            {!isLoading && <main>
-                <Search isError={isError} />
-                <StatsCard data={data} />
-                <Profile data={data} />
-                <NextFusionCharts reposData={reposData} />
-            </main>}
+            {!isLoading && (
+                <main>
+                    <Search isError={isError} />
+                    <StatsCard data={data} />
+                    <Profile data={data} />
+                    <NextFusionCharts reposData={reposData} />
+                </main>
+            )}
         </>
     );
 }
