@@ -3,7 +3,7 @@ import Follower from './Follower';
 import styles from './Profile.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useGetGithubUserByFollowersQuery } from '@/redux/services/githubApi';
-import { setPage } from '@/redux/features/usersSlice';
+import { setPage } from '@/redux/features/userSlice';
 
 const FollowersCard = () => {
     const divRef = useRef();

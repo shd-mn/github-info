@@ -1,17 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 import { githubApi } from '@/redux/services/githubApi';
 
-const initialState = {
+export interface UserState {
+    searchUser: string;
+    items: any;
+    page: number;
+}
+const initialState: UserState = {
     searchUser: 'john-smilga',
     items: [],
     page: 1,
 };
 
-export const usersSlice = createSlice({
+export const userSlice = createSlice({
     name: 'users',
     initialState,
     reducers: {
-        setSearchUser: function (state, action) {
+        setSearchUser: function (state, action: PayloadAction<string>) {
             state.searchUser = action.payload;
             state.items = [];
             state.page = 1;
@@ -33,7 +39,6 @@ export const usersSlice = createSlice({
     },
 });
 
-// Action creators are generated for each case reducer function
-export const { setSearchUser, setItems, setPage } = usersSlice.actions;
+export const { setSearchUser, setItems, setPage } = userSlice.actions;
 
-export default usersSlice.reducer;
+export default userSlice.reducer;

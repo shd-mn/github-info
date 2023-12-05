@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { SearchIcon } from '@/icons/icons.js';
 import styles from './Search.module.scss';
 import { useDispatch } from 'react-redux';
-import { setSearchUser } from '@/redux/features/usersSlice';
+import { setSearchUser } from '@/redux/features/userSlice';
 
 const Search = ({ isError }) => {
     const dispatch = useDispatch();
