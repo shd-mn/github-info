@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Footer from '@/components/footer';
 import React, { ReactNode } from 'react';
 import Navbar from '@/components/navbar';
+import Header from '@/components/header';
 
 function Layout({ children }: { children: ReactNode }) {
     return (
@@ -15,9 +16,11 @@ function Layout({ children }: { children: ReactNode }) {
                 />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            
-            <Navbar/>
-            <main>{children}</main>
+
+            <Header />
+            <main className="container flex-grow">
+                {children}
+            </main>
             <Footer />
         </>
     );
