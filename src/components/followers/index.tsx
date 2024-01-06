@@ -21,7 +21,6 @@ function Followers() {
   } = useGetGithubUserFollowersQuery({
     username,
     page: followersPage,
-    keepPreviousData: true,
   });
 
   const { data: followings, isLoading: followingLoading } =

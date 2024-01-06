@@ -18,7 +18,7 @@ function Layout({ children }: { children: ReactNode }) {
             </Head>
 
             <Header />
-            <main className="container flex-grow">
+            <main className="flex-grow">
                 {children}
             </main>
             <Footer />

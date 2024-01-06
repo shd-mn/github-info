@@ -1,6 +1,6 @@
 import RateLimit from "@/components/RateLimit";
 import Search from "@/components/search";
-import { setUser } from "@/redux/features/userSlice";
+import { setUserName } from "@/redux/features/userSlice";
 
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -12,8 +12,7 @@ function Home() {
       try {
         const username = localStorage.getItem("user");
         if (username) {
-          dispatch(setUser(username));
-          console.log("local user", username);
+          dispatch(setUserName(username));
         }
       } catch (error) {
         console.error("Error retrieving data from localStorage:", error);

@@ -1,5 +1,5 @@
 import React from "react";
-import StatsCardItem from "./StatsCartdtem";
+import StatsCardItem from "./StatsCardItem";
 import type { UserTypes } from "@/types/userTypes";
 import { Repos, Followers, Following, Gists } from "@/icons";
 
@@ -8,7 +8,7 @@ type PropTypes = {
 };
 const StatsCard = ({ data }: PropTypes) => {
   return (
-    <section>
+    <section className="mb-12">
       <div className="grid grid-cols-4 gap-8">
         <StatsCardItem
           icon={<Repos color="#da4a91" className="h-12 w-12" />}
