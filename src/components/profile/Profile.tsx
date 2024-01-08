@@ -2,8 +2,6 @@ import React, { ReactNode } from "react";
 import { Company, LinkIcon, Location } from "@/icons";
 import Image from "next/image";
 import type { UserTypes } from "@/types/userTypes";
-import styles from "./Profile.module.scss";
-import { link } from "fs";
 import Link from "next/link";
 type PropTypes = {
   data: UserTypes;
@@ -19,8 +17,9 @@ const Profile = ({ data }: PropTypes) => {
               className="h-full w-full rounded-full object-contain"
               src={data?.avatar_url}
               alt={data?.name}
-              width={100}
-              height={100}
+              width={300}
+              height={300}
+              priority
             />
           </figure>
           <div className="flex flex-col">
@@ -58,18 +57,16 @@ type InfoType = {
 
 const Info = ({ text, icon, link }: InfoType) => {
   return (
-    <>
-      <p className="flex items-center gap-2">
-        <span>{icon}</span>
-        {!link ? (
-          <p>{text}</p>
-        ) : (
-          <Link target="_blank" href={`https://www.${link}`}>
-            {link}
-          </Link>
-        )}
-      </p>
-    </>
+    <div className="flex items-center gap-2">
+      <span>{icon}</span>
+      {!link ? (
+        <p>{text}</p>
+      ) : (
+        <Link target="_blank" href={`https://www.${link}`}>
+          {link}
+        </Link>
+      )}
+    </div>
   );
 };
 
