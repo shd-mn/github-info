@@ -6,14 +6,15 @@ const NextFusionCharts = dynamic(
   () => import("@/components/fusioncharts/NextFusionChart"),
   { ssr: false },
 );
+
 import {
   useGetGithubUserByNameQuery,
   useGetGithubUserReposQuery,
 } from "@/redux/services/githubApi";
+
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import Loading from "@/components/common/Loading";
-import Sidebar from "@/components/Sidebar";
 import { setUser } from "@/redux/features/userSlice";
 import Followers from "@/components/followers";
 
@@ -22,7 +23,7 @@ export default function Dashboard() {
   const dispatch = useDispatch();
   const { data, isLoading, isError, isSuccess } =
     useGetGithubUserByNameQuery(username);
-  const { data: reposData } = useGetGithubUserReposQuery(username);
+  const { data: reposData } = useGetGithubUserReposQuery({ username });
 
   useEffect(() => {
     dispatch(setUser(data));
@@ -33,14 +34,11 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="grid h-full max-h-[900px] grid-cols-[1fr_5fr] overflow-y-scroll">
-      <Sidebar />
-      <div className="p-8">
-        <Followers />
-        <Profile data={data} />
-        <StatsCard data={data} />
-        <NextFusionCharts reposData={reposData} />
-      </div>
-    </div>
+    <>
+      <Profile data={data} />
+      <StatsCard data={data} />
+      <NextFusionCharts reposData={reposData} />
+      <Followers />
+    </>
   );
 }
