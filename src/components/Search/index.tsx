@@ -3,9 +3,14 @@ import { useLazySearchGithubUserQuery } from "@/redux/services/githubApi";
 import { GoSearch, GoX } from "react-icons/go";
 import SearchResult from "./SearchResult";
 
-const Search = () => {
+type SearchTypes = {
+  refetch: () => void;
+  rateLimit?: any;
+};
+
+const Search = ({ rateLimit, refetch }: SearchTypes) => {
   const [username, setUsername] = useState("");
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const [trigger, { data, isLoading, error }] = useLazySearchGithubUserQuery();
 
   const handleSubmit = (e: FormEvent) => {
@@ -13,6 +18,7 @@ const Search = () => {
     if (username) {
       trigger(username);
     }
+    refetch();
   };
 
   const handleDelete = () => {
@@ -23,7 +29,7 @@ const Search = () => {
   };
 
   return (
-    <div className="group relative w-[500px]">
+    <div className="group absolute left-1/2 top-1/2 w-[500px] -translate-x-1/2 -translate-y-1/2">
       <form
         onSubmit={handleSubmit}
         className="focus-within:border-1 relative flex w-full items-center rounded-full border-blue-400 shadow-[0px_0px_2px_#efefef]"
@@ -32,11 +38,15 @@ const Search = () => {
           ref={inputRef}
           className="w-full rounded-full border-none  bg-transparent px-4 py-1 text-gray-400 outline-none"
           type="text"
-          placeholder="Search github user..."
+          placeholder="Search github User..."
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
         <div className="absolute right-1 flex items-center gap-2">
+          <p>
+            {rateLimit?.resources?.search?.remaining}/
+            {rateLimit?.resources?.search?.limit}
+          </p>
           {username && (
             <button type="button" className="" onClick={handleDelete}>
               <GoX />
