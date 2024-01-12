@@ -1,32 +1,15 @@
 import RateLimit from "@/components/RateLimit";
-import Search from "@/components/search";
-import { setUserName } from "@/redux/features/userSlice";
-
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import Footer from "@/components/footer";
+import Search from "@/components/Search";
+import { useGetRateLimitQuery } from "@/redux/services/githubApi";
 
 function Home() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    const getDataFromLocalStorage = () => {
-      try {
-        const username = localStorage.getItem("user");
-        if (username) {
-          dispatch(setUserName(username));
-        }
-      } catch (error) {
-        console.error("Error retrieving data from localStorage:", error);
-      }
-    };
-
-    getDataFromLocalStorage();
-  }, [dispatch]);
-
   return (
-    <div className="h-full pt-12">
+    <main className="h-full flex-wrap pt-12">
       <RateLimit />
-      <Search />
-    </div>
+      {/* <Search /> */}
+      <Footer />
+    </main>
   );
 }
 
