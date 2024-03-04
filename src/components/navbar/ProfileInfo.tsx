@@ -4,11 +4,12 @@ import { useSelector } from "react-redux";
 import { useGetGithubUserByNameQuery } from "@/redux/services/githubApi";
 import { RootState } from "@/redux/store";
 import Link from "next/link";
+import type { RateTypes } from "@/types/rateTypes";
+import RequestCount from "./RequestCount";
 
-function ProfileInfo() {
+function ProfileInfo({ rateLimit }: { rateLimit: RateTypes }) {
   const username = useSelector((state: RootState) => state.user.username);
   const { data, isLoading } = useGetGithubUserByNameQuery(username);
-  
 
   if (isLoading) {
     return <div>loading...</div>;
@@ -16,6 +17,7 @@ function ProfileInfo() {
 
   return (
     <Link href="/dashboard" className="flex items-center gap-x-3">
+      <RequestCount rateLimit={rateLimit} />
       <figure className="flex h-10">
         <Image
           className="h-full w-full rounded-full object-contain"
@@ -25,7 +27,7 @@ function ProfileInfo() {
           height={50}
         />
       </figure>
-      <h3>{data.name}</h3>
+      <h3>{data?.name}</h3>
     </Link>
   );
 }
